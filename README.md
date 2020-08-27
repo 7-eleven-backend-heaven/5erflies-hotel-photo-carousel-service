@@ -1,46 +1,95 @@
-# Project Name
+**GALLERY SERVICE API:** follows the general pattern of REST.
 
-> Project description:
+**GET Listings:**
+Retrieves data about the specified listing id.
+* GET `/listing/:id`
 
+**Path Parameters:**
+* `id` listing id
 
-On a generic airbnb listing page, using MongoDB hosted database for storing relevant data that will be displayed on the photo carousel service component.
-I will set up APIs for client side to interact with the database. Next goal is the build the user interface with React and style components.
+**Success Status Code:** `200`
 
-End goal is a seamless interaction between the client, api, and database to support optimized functionality and reach airbnb's business goal.
+**Returns:** a JSON Object.
+```json
+    {
+      "id":  "Number",
+      "title": "String",
+      "rating": "Number",
+      "reviews": "Number",
+      "superHost": "Boolean",
+      "location": "String",
+      "photos": [
+        {
+          "imageURL": "String"
+        }
+      ],
+    }
+```
+------------------------------------------------------------------
+**POST New Gallery Listing:** Posts a new listing to the gallery.
+* POST `/listing`
 
+**Success Status Code:** `201`
 
-## Related Projects
+**The Request Body** expects a JSON object containing the following keys:
+```json
+    {
+      "id":  "Number",
+      "title": "String",
+      "rating": "Number",
+      "reviews": "Number",
+      "superHost": "Boolean",
+      "location": "String",
+      "photos": [
+        {
+          "imageURL": "String"
+        }
+      ],
+    }
+```
+------------------------------------------------------------------
+**UPDATE Gallery:**updates an existing gallery listing with the specified data.
+* PUT `/listing/:id`
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+**Success Status Code:** `204`
 
-## Table of Contents
+**The Request Body** expects a JSON object with the following keys:
+```json
+    {
+      "title": "String",
+      "rating": "Number",
+      "reviews": "Number",
+      "superHost": "Boolean",
+      "location": "String",
+      "photos": [
+        {
+          "imageURL": "String"
+        }
+      ],
+    }
+```
+------------------------------------------------------------------
+**DELETE Listing:**deletes an existing gallery listing with the specified id.
+* DELETE `/listing/:id`
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+**Path Parameters:**
+* `id` listing id
 
-## Usage
+**Success Status Code:** `204`
 
-> Some usage instructions
+------------------------------------------------------------------
+**Add Image:** adds a new images to an existing gallery listing
+* POST `/listing/:id/images`
 
-## Requirements
+**Path Parameters:**
+* `id` listing id
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
+**Success Status Code:** `201`
+```json
+    {
+      "id":  "Number",
+      "imageURL": "String",
+      "uploaded": "YYYY-MM-MM",
+    }
 ```
 

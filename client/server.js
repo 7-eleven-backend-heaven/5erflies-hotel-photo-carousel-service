@@ -3,7 +3,7 @@ const app = express();
 const db = require('../database/listing-model');
 const port = 3001
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + './client/public'));
 // '/user?ID=12345' - client
 // '/user/:id' - server
 
