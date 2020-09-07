@@ -50,7 +50,6 @@ Retrieves data about the specified property id.
 * GET `/property/:property_id`
 
 **Path Parameters:**
-* `id` user id
 * `property_id` property id
 
 **Success Status Code:** `200`
@@ -60,6 +59,10 @@ Retrieves data about the specified property id.
     {
       "property_id":  "Number",
       "title": "String",
+      "bedrooms": "Number",
+      "beds": "Number",
+      "baths": "Number",
+      "guests": "Number",
       "rating": "Number",
       "reviews": "Number",
       "superHost": "Boolean",
