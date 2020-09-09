@@ -1,3 +1,4 @@
+const newrelic = require('newrelic');
 const express = require('express');
 const path = require('path');
 const db = require('../sdc_database/index.js');
@@ -14,9 +15,9 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join((__dirname, './client/public'))));
 
-app.get('/properties/:property_id', (req, res) => {
-  console.log('GET ROUTE WORKING!');
-  db.getProperties(1, (error, data) => {
+app.get('/properties/:id', (req, res) => {
+  let id = Number(req.params.id);
+  db.getProperties(id, (error, data) => {
     if (error) {
       res.status(400).send(error);
     } else {
@@ -27,4 +28,4 @@ app.get('/properties/:property_id', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`SERVER LISTENING ON ${PORT}`)
-})
+});
