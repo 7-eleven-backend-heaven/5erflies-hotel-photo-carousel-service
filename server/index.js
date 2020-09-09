@@ -7,7 +7,7 @@ const PORT = 5000;
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 // Connection URL
-const connectionUrl = 'mongodb://localhost:27017';
+const connectionUrl = 'mongodb://34.222.29.204:27017';
 // Database Name
 const database_name = 'sdc_galley';
 

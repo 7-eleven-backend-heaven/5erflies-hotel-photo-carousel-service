@@ -4,7 +4,7 @@ const process = require('process');
 const v8 = require('v8');
 
 const MongoClient = mongodb.MongoClient;
-const connectionUrl = 'mongodb://localhost:27017';
+const connectionUrl = 'mongodb://34.222.29.204:27017';
 const databaseName = 'sdc_galley';
 
 let numberOfProperties = 2000;
