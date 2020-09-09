@@ -14,7 +14,9 @@
     "seed": "node seed.js",
     "test": "jest",
     "watch": "jest --watch",
-    "coverage": "jest --coverage --colors"
+    "coverage": "jest --coverage --colors",
+    "server": "nodemon server/index.js",
+    "sdc": "node sdc_database/seed.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

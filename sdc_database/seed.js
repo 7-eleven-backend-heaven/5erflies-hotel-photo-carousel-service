@@ -7,14 +7,6 @@ const MongoClient = mongodb.MongoClient;
 const connectionUrl = 'mongodb://localhost:27017';
 const databaseName = 'sdc_galley';
 
-const checkMemoryUsage = () => {
-  console.log('Memory usage:', process.memoryUsage())
-};
-
-const checkHeapStatistics = () => {
-  console.log('Heap Statistics:', v8.getHeapStatistics())
-};
-
 let numberOfProperties = 2000;
 
 MongoClient.connect(connectionUrl, (error, client) => {
@@ -28,6 +20,14 @@ MongoClient.connect(connectionUrl, (error, client) => {
   }
 })
 
+const checkMemoryUsage = () => {
+  console.log('Memory usage:', process.memoryUsage())
+};
+
+const checkHeapStatistics = () => {
+  console.log('Heap Statistics:', v8.getHeapStatistics())
+};
+
 const seedMongoDB = function (db, N, callback, timesCalled = 0) {
   const collection = db.collection('properties');
   // if we reached N, invoke callback
@@ -35,8 +35,10 @@ const seedMongoDB = function (db, N, callback, timesCalled = 0) {
     callback();
   } else {
     let documents = [];
-    // build the collection\
-    for (let i = 1; i < 5000; i += 1) {
+    // build the collection
+    let i = 1 + (5000 * timesCalled);
+    let limit = i + 5000;
+    for (i; i < limit; i += 1) {
       const img_collection = createImagesArray(i);
       const document = createDocument(i, img_collection);
       documents.push(document);
@@ -45,17 +47,10 @@ const seedMongoDB = function (db, N, callback, timesCalled = 0) {
     insertDocuments(collection, documents, timesCalled + 1);
     // invoke recursively
     setTimeout(() => { seedMongoDB(db, N, callback, timesCalled + 1) }, 0)
-
   }
-
 };
 
-// const failure = 'Error Inserting Documents into Properties Collection';
-// const success = 'Final Document Batch Loaded to Database'
-
 const insertDocuments = (collection, documents, number) => {
-
-  // collection.insertMany = collection.insertMany.bind(collection);
   collection.insertMany(documents, (error, docs) => {
     if (error) {
       // console.log(error);
@@ -64,7 +59,6 @@ const insertDocuments = (collection, documents, number) => {
       console.log('Data Succesfully Loaded into Database:', number);
     }
   });
-
 };
 
 const createImagesArray = (count) => {
@@ -196,26 +190,3 @@ const descriptions = [
   "Nice Sitting Area for a Book or Casual conversation",
   "Great Dining and Entertaining"
 ]
-
-
-// {
-//   property_id:
-//   rating:
-//   review_count:
-//   location:
-//   images: [
-//     {
-//       url:
-//         description:
-//     }
-//   ]
-//   user_id:
-// };
-
-// let saved_lists_Schema = new Schema {
-//   list_id: NUMBER
-//   list_name: VARCHAR(50)
-// proposed_dates: DATE
-// list_count: SMALLINIT
-// date_created: DATE
-// }
