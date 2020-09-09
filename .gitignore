@@ -24,3 +24,10 @@ coverage
 build/
 dist/
 
+# # CSV files
+# users.csv
+# properties.csv
+# lists.csv
+# images.csv
+
+newrelic.js
