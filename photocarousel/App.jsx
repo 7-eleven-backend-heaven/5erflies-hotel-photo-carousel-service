@@ -19,33 +19,19 @@ const Photocarousel = () => {
   const closeModal = () => setShowModal(false);
   // console.log('clientb', listing);
 
-  // useEffect(() => { // a hooks version of componentDidMount
-  //   const queryID = window.location.search;
-  //   // console.log('logged: window.location (url parameter) = ?id=10', queryID)
-  //   const url = '/listing' + '/' + queryID;
-  //   axios.get(url)
-  //   .then((res) => {
-  //     setListing(res.data);
-  //   })
-  //   .catch((err) => {
-  //     console.log('client: failed getting db', err);
-  //   })
-  // }, []);
-
-  // componentDidMount() {
-  //   this.useEffect();
-  // }
-
-  useEffect() {
-    axios.get('/property/:property_id')
-      .then((response) => {
-        setListing(response.data);
+  useEffect(() => { // a hooks version of componentDidMount
+    // const queryID = window.location.search;
+    // console.log('logged: window.location (url parameter) = ?id=10', queryID)
+    const url = '/properties/:id';
+    axios.get(url)
+      .then((res) => {
+        console.log('we are in here!');
+        setListing(res.data);
       })
-      .catch((error) => {
-        console.log('client: failed getting db', error);
+      .catch((err) => {
+        console.log('client: failed getting db', err);
       })
-  }
-
+  }, []);
 
   if (listing.length == 0) { return null; }
   return (

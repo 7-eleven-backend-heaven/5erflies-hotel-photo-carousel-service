@@ -4,7 +4,7 @@ const process = require('process');
 const v8 = require('v8');
 
 const MongoClient = mongodb.MongoClient;
-const connectionUrl = 'mongodb://34.222.29.204:27017';
+const connectionUrl = 'mongodb://localhost:27017';
 const databaseName = 'sdc_galley';
 
 let numberOfProperties = 2000;
@@ -75,12 +75,13 @@ const createImagesArray = (count) => {
 
 const createDocument = (count, images) => {
   let document = {
-    id: count,
-    description: `${adjectives[count % adjectives.length]} ${property[count % property.length]} ${amenities[count % amenities.length]}`,
+    ID: count,
+    listingTitle: `${adjectives[count % adjectives.length]} ${property[count % property.length]} ${amenities[count % amenities.length]}`,
     rating: `${rating[count % rating.length]}`,
-    reviews: `${reviews[count % reviews.length]}`,
-    neighborhoods: `${neighborhoods[count % neighborhoods.length]}`,
-    images: images
+    numOfReviews: `${reviews[count % reviews.length]}`,
+    superHost: `${superhost[i % 2]}`,
+    location: `${neighborhoods[count % neighborhoods.length]}`,
+    photos: images
   };
   return document;
 }
