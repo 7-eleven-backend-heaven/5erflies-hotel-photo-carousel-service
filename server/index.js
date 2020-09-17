@@ -9,7 +9,7 @@ console.log(db);
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 // Connection URL
-const connectionUrl = 'mongodb://localhost:27017';
+const connectionUrl = `mongodb://${username}:${pass}@localhost:27017/sdc_galley`;
 // Database Name
 const database_name = 'sdc_galley';
 
