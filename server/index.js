@@ -5,6 +5,7 @@ const db = require('../sdc_database/index.js');
 var morgan = require('morgan');
 const PORT = 5000;
 
+console.log(db);
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 // Connection URL
@@ -20,11 +21,13 @@ app.use('/property/:id', express.static(path.join((__dirname, './client/public')
 app.get('/properties/:id', (req, res) => {
   console.log('this is working')
   let id = Number(req.params.id);
+  console.log(id);
   db.getProperties(id, (error, data) => {
     if (error) {
       res.status(400).send(error);
     } else {
       res.status(200).send(data)
+      console.log(data);
     }
   });
 });
