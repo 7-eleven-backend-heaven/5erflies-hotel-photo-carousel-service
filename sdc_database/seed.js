@@ -15,18 +15,17 @@ MongoClient.connect(connectionUrl, (error, client) => {
   } else {
     console.log('Successfully connected to MongoDb');
     const db = client.db(databaseName);
-
     seedMongoDB(db, numberOfProperties, () => { client.close(); })
   }
 })
 
-const checkMemoryUsage = () => {
-  console.log('Memory usage:', process.memoryUsage())
-};
+// const checkMemoryUsage = () => {
+//   console.log('Memory usage:', process.memoryUsage())
+// };
 
-const checkHeapStatistics = () => {
-  console.log('Heap Statistics:', v8.getHeapStatistics())
-};
+// const checkHeapStatistics = () => {
+//   console.log('Heap Statistics:', v8.getHeapStatistics())
+// };
 
 const seedMongoDB = function (db, N, callback, timesCalled = 0) {
   const collection = db.collection('properties');
@@ -51,6 +50,7 @@ const seedMongoDB = function (db, N, callback, timesCalled = 0) {
 };
 
 const insertDocuments = (collection, documents, number) => {
+  console.log(collection);
   collection.insertMany(documents, (error, docs) => {
     if (error) {
       // console.log(error);
@@ -65,7 +65,8 @@ const createImagesArray = (count) => {
   let img_collection = [];
   for (let j = 1; j <= `${images[count % images.length]}`; j += 1) {
     let image = {
-      url: `https://sdc-image-gallery-images.s3-us-west-2.amazonaws.com/image${num_imgs[i % num_imgs.length]}.jpg`,
+      // changed i to j...
+      url: `https://sdc-image-gallery-images.s3-us-west-2.amazonaws.com/image${num_imgs[j % num_imgs.length]}.jpg`,
       description: `${descriptions[count % descriptions.length]}`
     }
     img_collection.push(image);
